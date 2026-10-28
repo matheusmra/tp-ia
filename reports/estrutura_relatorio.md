@@ -1,66 +1,39 @@
-# Estrutura do Relatorio Final (3 a 5 paginas)
-## Disciplina: Inteligencia Artificial
-### Professora: Cristiane Neri Nobre
-### Trabalho em Competicao: Deteccao de Intrusao em Redes (NSL-KDD)
+# Roteiro do relatório final — 3 a 5 páginas
 
----
+**Equipe:** preencher número e nomes do grupo do CANVAS.
+**Professora:** Cristiane Neri Nobre.
 
-## 1. Introducao e Contexto do Problema
-- Breve descricao do problema de deteccao de intrusao em redes de computadores.
-- Caracterizacao da base NSL-KDD (41 features descritivas, distribuicao desbalanceada das classes, conjunto de treino KDDTrain+ e teste KDDTest+).
-- Definicao da metrica de avaliacao oficial da competicao: F1-score macro.
+Este documento distribui a redação; não contém resultados nem decisões já tomadas. Preencher após o trabalho autoral nos notebooks.
 
-## 2. Metodologia e Cuidados contra Vazamento de Dados (Data Leakage)
-- Explicacao do isolamento metodologico rigoroso do conjunto de teste (KDDTest+), utilizado exclusivamente na avaliacao final.
-- Justificativa para a remocao do atributo `difficulty_level` das features descritivas (metrica auxiliar externa que nao compoe o trafego de rede).
-- Tratamento de atributos redundantes/constantes (exclusao de `num_outbound_cmds` devido a variancia zero).
-- Estruturacao do pipeline com `imblearn.pipeline.Pipeline`, garantindo que balanceamento (SMOTE/RandomUnderSampler) e transformacoes (scalers, encoders) sejam ajustados apenas no conjunto de treino de cada particao da validacao cruzada.
+## 1. Problema e diagnóstico — membros 1 e 2
 
-## 3. Experimentos de Pre-Processamento e Justificativas Tecnicas
-### 3.1 Tratamento de Inconsistencias e Redundancias
-- Analise das duplicatas parciais e decisoes tomadas.
+Apresentar os CSVs oficiais, alvo binário, dimensões, tipos, ausências, proporção das classes e motivo para usar F1-macro. Usar números calculados na nova base, sem reutilizar os resultados da versão antiga.
 
-### 3.2 Conversao Simbolico-Numerica
-- Discussao da alta cardinalidade do atributo `service` (mais de 65 categorias unicas).
-- Comparativo tecnico entre One-Hot Encoding e Frequency/Count Encoding (ou Ordinal/Target Encoding).
+## 2. Qualidade dos dados e vazamento — membros 4 e 5
 
-### 3.3 Normalizacao e Transformacao Numerica
-- Comparativo entre `StandardScaler` e `RobustScaler` (sensibilidade a outliers no trafego de pacotes).
+Apresentar evidências de redundâncias e inconsistências, análise de associação de todos os atributos com a classe e justificativa das exclusões decididas pela equipe. Examinar a disponibilidade temporal dos sinais operacionais adicionados; correlação isolada não prova leakage.
 
-### 3.4 Reducao de Dimensionalidade ou Selecao de Atributos
-- Justificativa da tecnica adotada (ex.: selecao univariada via `SelectKBest` ou projecao via `PCA`).
+Descrever o protocolo de validação apenas dentro do treino, controle de duplicatas entre dobras e isolamento do teste oficial.
 
-### 3.5 Tecnicas de Balanceamento de Classes
-- Comparacao tecnica entre tecnicas testadas (ex.: SMOTE vs. RandomUnderSampler vs. Baseline).
-- Impacto do desbalanceamento severo, principalmente sobre as classes minoritarias `u2r` e `r2l`.
+## 3. Pré-processamento — contribuições dos cinco membros
 
-## 4. Algoritmos de Classificacao e Tabela Comparativa Estruturada
-### 4.1 Descricao dos Classificadores
-- Arvore de Decisao (Decision Tree)
-- Random Forest
-- Perceptron Multicamadas (MLP)
+Justificar tratamento de ausentes/redundâncias/inconsistências, dois balanceamentos, codificação e cardinalidade de service, transformação numérica e redução de dimensionalidade ou seleção de instâncias. Descrever comparações explícitas com uma referência, sempre com ajuste dentro das dobras.
 
-### 4.2 Tabela Comparativa das Combinacoes Testadas
-| ID | Estrategia de Pre-Processamento | Balanceamento | Algoritmo | F1-Macro (CV) | F1-Macro Desvio Padrao | Acuracia (CV) |
+## 4. Modelos e tabela comparativa — membros 1–4; seleção pelo membro 5
+
+Descrever pelo menos três algoritmos vistos em aula, parâmetros, sementes e resultados reais. Consolidar:
+
+| Estratégia de pré-processamento | Balanceamento | Algoritmo | F1-macro médio ± desvio | Precisão por classe | Recall por classe | Tempo |
 |---|---|---|---|---|---|---|
-| E1 | One-Hot + StandardScaler | Nenhum | Decision Tree | - | - | - |
-| E2 | One-Hot + StandardScaler | SMOTE | Decision Tree | - | - | - |
-| E3 | Frequency + RobustScaler | SMOTE | Random Forest | - | - | - |
-| E4 | Frequency + RobustScaler | RandomUnderSampler | Random Forest | - | - | - |
-| E5 | Frequency + RobustScaler | SMOTE | MLP | - | - | - |
+| A preencher após execução | | | | | | |
 
-### 4.3 Discussao dos Resultados
-- Analise dos compromissos entre precisao e revocacao nas classes raras.
-- Justificativa tecnica para a escolha da combinacao vencedora.
+Discutir ganhos, perdas e limitações; justificar o vencedor sem usar o teste.
 
-## 5. Avaliacao Final no Conjunto de Teste (KDDTest+) e Explicabilidade
-- Resultado oficial obtido no conjunto de teste: F1-score macro.
-- Matriz de confusao e diagnostico do comportamento do modelo frente aos novos ataques (novel attacks presentes apenas no teste).
-- Explicabilidade do modelo vencedor: analise de importancia de atributos (Feature Importances / SHAP) e correlacao com o dominio de seguranca.
+## 5. Explicabilidade, reprodução e entrega — membros 1–5
 
-## 6. Conclusao
-- Sintese dos principais achados tecnicos e licoes metodologicas.
+Membro 3: interpretar a explicabilidade do vencedor. Membro 2: distinguir métricas internas das oficiais.
+Membros 1 e 4: explicar reconstrução do pipeline, treino final, geração e validação do CSV e reprodução do arquivo enviado.
+Membro 5: consolidar limitações, contribuições, declaração de IA e revisão final.
 
-## 7. Declaracao de Integridade Academica e Uso de Ferramentas
-- Declaracao de autoria do trabalho.
-- Descricao do uso de eventuais ferramentas de IA generativa para auxilio na codificacao ou estruturacao textual, indicando ferramenta e finalidade (conforme item 8 do enunciado).
+O teste não tem rótulos: incluir métricas oficiais e ranking somente após divulgação da professora.
+Declarar ferramenta de IA e finalidade efetivamente utilizadas, inclusive apoio do OpenAI Codex à organização dos roteiros; não alegar revisões ainda não realizadas.

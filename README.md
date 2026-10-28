@@ -1,81 +1,53 @@
-# Competicao de Inteligencia Artificial: Deteccao de Intrusao em Redes
+# Detecção de intrusão em redes — roteiro da equipe
 
-Projeto desenvolvido para a disciplina de Inteligencia Artificial (Professora: Cristiane Neri Nobre).
-O objetivo do trabalho e aplicar etapas de pre-processamento de dados de forma critica e fundamentada na base de dados **NSL-KDD**, comparando classificadores com foco na metrica oficial **F1-score macro** e garantindo rigor metodologico contra vazamento de dados (**data leakage**).
+Professora: Cristiane Neri Nobre. Este projeto organiza as tarefas dos cinco integrantes conforme os novos CSVs e o enunciado. **O notebook 01 reaproveita o código anterior dos membros 1–4, adaptado à nova base. Os notebooks 02–04 continuam como roteiros, sem implementação.** Cada membro deve revisar, completar e justificar sua seção; a análise de vazamento do Membro 5 permanece pendente no notebook 01.
 
----
+## Base oficial
 
-## Estrutura do Projeto
+- `data/treino.csv`: treino com alvo `class` (`normal` ou `anomaly`).
+- `data/teste_sem_rotulo.csv`: teste sem classe, com `id`.
+- `data/modelo_de_submissao.csv`: formato exigido (`id`, `class_prevista`).
 
-```text
-tp-ia/
-├── data/
-│   ├── raw/                              # Arquivos brutos originais (KDDTrain+.txt, KDDTest+.txt)
-│   └── processed/                        # Dados intermediarios ou caches (se necessario)
-├── notebooks/
-│   ├── 01_analise_exploratoria.ipynb     # Etapa 1: EDA, desbalanceamento, qualidade e leakage
-│   ├── 02_pre_processamento.ipynb        # Etapa 2: Experimentos comparativos de pre-processamento
-│   ├── 03_classificadores.ipynb          # Etapa 3: Treinamento, validacao cruzada e tabela comparativa
-│   └── 04_avaliacao_final.ipynb          # Etapa 4: Avaliacao em KDDTest+ e explicabilidade
-├── src/                                  # Codigo modular compartilhado (sem duplicacao e sem leakage)
-│   ├── __init__.py
-│   ├── config.py                         # Constantes, caminhos, nomes das 43 colunas e mapeamentos
-│   ├── data_loader.py                    # Carga de dados, remocao de difficulty_level e checagem de qualidade
-│   ├── preprocessing.py                  # ColumnTransformer modular (OneHot, Frequency, scalers, selecao)
-│   ├── balancing.py                      # Balanceamento com imblearn (SMOTE, RandomUnderSampler)
-│   ├── models.py                         # Construtor dos algoritmos (Decision Tree, Random Forest, MLP)
-│   └── evaluation.py                     # StratifiedKFold sem vazamento, metricas e matriz de confusao
-├── reports/
-│   ├── figures/                          # Graficos gerados para o relatorio
-│   └── estrutura_relatorio.md            # Template estruturado para o relatorio final (3 a 5 paginas)
-├── requirements.txt                      # Dependencias Python necessarias
-├── .gitignore                            # Arquivos e diretorios ignorados pelo git
-└── README.md                             # Documentacao do projeto
-```
+Não usar os arquivos NSL-KDD antigos, não remapear para cinco famílias e não criar outra separação oficial. A validação interna é permitida apenas dentro do treino. O teste não oferece gabarito: as métricas oficiais serão calculadas pela professora.
 
----
+## Uma tarefa para cada membro em cada notebook
 
-## Requisitos e Instalacao
+Substituir os identificadores pelos nomes do grupo do CANVAS. No notebook 01, cada seção preserva o código reaproveitável e indica a revisão ou complemento necessário. Nos notebooks 02–04, as seções descrevem tarefa, entregável, célula TODO e espaço para resultados e justificativa.
 
-Recomenda-se o uso de um ambiente virtual Python (versao 3.10 ou superior).
+| Integrante | 01 — Análise exploratória | 02 — Pré-processamento | 03 — Classificadores | 04 — Entrega final |
+|---|---|---|---|---|
+| Membro 1 | Carga, estrutura, tipos e ausentes | Ausentes, redundâncias e inconsistências | Árvore de Decisão e protocolo comum | Reconstrução e treino final |
+| Membro 2 | Classes e desbalanceamento | Duas técnicas de balanceamento | Random Forest | Diagnóstico das métricas de validação |
+| Membro 3 | Categorias e cardinalidade | Codificação e transformação numérica | MLP ou terceiro algoritmo visto em aula | Explicabilidade do vencedor |
+| Membro 4 | Redundâncias, inconsistências e outliers | Redução de dimensionalidade ou seleção de instâncias | Tabela comparativa estruturada | Previsões e CSV de submissão |
+| Membro 5 | Associação de todos os atributos, leakage e diagnóstico | Integração e comparação das estratégias | Seleção e auditoria metodológica | Relatório, apresentação e conferência da entrega |
 
-1. Crie e ative o ambiente virtual:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
+Todos participam da revisão e precisam compreender o fluxo completo. O responsável pela integração depende dos resultados dos demais; não deve executar sozinho as tarefas individuais.
 
-2. Instale as dependencias:
-```bash
-pip install -r requirements.txt
-```
+## Cronograma de 2026
 
----
-
-## Modulos Base (src/)
-
-- **`config.py`**: Centraliza os caminhos do projeto, a semente aleatoria (`RANDOM_STATE = 42`), as listas de features numericas e categoricas, o atributo `difficulty_level`, e o dicionario completo `ATTACK_MAPPING` que converte os 40 tipos de ataque observados em treino e teste para as 5 superclasses canonicas: `normal`, `dos`, `probe`, `r2l` e `u2r`.
-- **`data_loader.py`**: Carrega `KDDTrain+.txt` e `KDDTest+`. Por padrao, separa `X` e `y`, mapeia as classes, remove o atributo `difficulty_level` (para evitar vazamento) e elimina colunas de variancia zero como `num_outbound_cmds`.
-- **`preprocessing.py`**: Construtor flexivel de `ColumnTransformer` compativel com o Scikit-Learn. Oferece codificacao One-Hot tradicional e Frequency/Count Encoding para o atributo `service` (devido a sua alta cardinalidade com mais de 65 servicos), alem de selecao univariada (`SelectKBest`) ou projecao (`PCA`).
-- **`balancing.py`**: Fabrica de estimadores de balanceamento com `imblearn` (`SMOTE`, `RandomUnderSampler`).
-- **`models.py`**: Fabrica de classificadores (`DecisionTreeClassifier`, `RandomForestClassifier`, `MLPClassifier`) e construtor de pipelines unificadas via `imblearn.pipeline.Pipeline`.
-- **`evaluation.py`**: Utilitarios de validacao cruzada estratificada (`StratifiedKFold`) onde transformacoes e amostragem ocorrem apenas na particao de treino de cada dobra, funcao para avaliacao final em `KDDTest+` e geracao da matriz de confusao.
-
----
-
-## Pontos de Controle do Cronograma
-
-| Etapa | Data | Atividades | Entregavel |
+| Etapa | Prazo | Valor | Entrega |
 |---|---|---|---|
-| **1. Analise Exploratoria** | 24/10 | Caracterizacao da base, distribuicao de classes, desbalanceamento severo (ex.: U2R), categoricos, variancia zero e diagnostico de data leakage. | `notebooks/01_analise_exploratoria.ipynb` |
-| **2. Pre-Processamento** | 07/11 | Comparacao de 2 balanceamentos (SMOTE vs RandomUnderSampler), 1 codificacao categorica (OneHot vs Frequency para service), 1 normalizacao e 1 reducao/selecao. | `notebooks/02_pre_processamento.ipynb` |
-| **3. Classificadores** | 21/11 | Treinamento dos 3 algoritmos, comparacao de combinacoes em validacao cruzada estratificada e tabela comparativa. | `notebooks/03_classificadores.ipynb` |
-| **4. Competicao Final** | 28/11 | Avaliacao definitiva no KDDTest+, calculo oficial do F1-macro, explicabilidade (SHAP / Feature Importances) e relatorio final de 3 a 5 paginas. | `notebooks/04_avaliacao_final.ipynb` e `reports/` |
+| 1 | 01/11 | 2,00 | Notebook de análise exploratória e diagnóstico |
+| 2 | 07/11 | 4,00 | Notebook de experimentos de pré-processamento |
+| 3 | 21/11 | 4,00 | Notebook com três classificadores e tabela comparativa |
+| 4 | 28/11 | 5,00 | Notebook completo, relatório de 3–5 páginas, CSV e apresentação |
 
----
+## Regras para a implementação pela equipe
 
-## Prevencao Metodologica contra Data Leakage
+- Investigar a associação de cada atributo com a classe antes do treinamento e justificar possíveis exclusões. Correlação não comprova vazamento por si só.
+- Investigar a origem e disponibilidade dos sinais adicionados, incluindo `score_ids_legado`, `tipo_alerta_soc` e `tempo_resposta_analista_min`.
+- Ajustar imputação, codificação, normalização, balanceamento e redução apenas no treino de cada dobra.
+- Comparar explicitamente estratégias para dados redundantes/inconsistentes, pelo menos dois balanceamentos, codificação, transformação numérica e redução de dimensionalidade **ou seleção de instâncias**.
+- Comparar pelo menos três classificadores vistos em aula. Selecionar pelo F1-macro de validação interna e explicar o vencedor.
+- Gerar `submissao_<número_da_equipe>.csv` sem alterar IDs ou ordem, com classes apenas `normal`/`anomaly`, sem vazios, ausências, repetições ou IDs extras.
+- O notebook entregue deve reproduzir exatamente o CSV enviado. Informar o número real do grupo.
+- Declarar uso de IA e contribuições efetivas dos integrantes.
 
-1. **Uso exclusivo do conjunto de teste**: O arquivo `KDDTest+.txt` deve ser utilizado unicamente na etapa final. Todas as decisoes de preprocessamento, selecao de atributos e ajuste de hiperparametros devem ser validadas apenas no `KDDTrain+`.
-2. **Remocao de `difficulty_level`**: Esse atributo presente no arquivo bruto e uma estimativa de dificuldade de predicao externa ao trafego de rede. Inclui-lo nas features preditivas constitui vazamento direto de informacao.
-3. **Pipeline integrada**: Todo balanceamento (`SMOTE`, `RandomUnderSampler`) e escalonamento (`StandardScaler`, `RobustScaler`) deve ser executado dentro da `Pipeline` do `imblearn`, garantindo que o ajuste (`fit`) ocorra exclusivamente sobre o subconjunto de treino da particao.
+## Arquivos de apoio
+
+`src/` e `requirements.txt` foram devolvidos à versão anterior à implementação indevida. São estrutura **legada**, ainda com referências à base antiga e funções incompletas; a adaptação desses módulos faz parte das tarefas dos membros. O notebook 01 lê treino.csv diretamente, sem depender desses módulos; os demais roteiros não os executam.
+
+A versão antiga registrada no histórico Git foi a base do reaproveitamento no notebook 01. Suas conclusões numéricas e saídas foram retiradas para não confundi-las com a nova base. As células de código existentes foram verificadas com treino.csv; as sínteses e análises pendentes ainda precisam ser completadas pelos responsáveis.
+
+`reports/estrutura_relatorio.md` contém o roteiro do relatório a ser escrito pela equipe. Não há resultados de modelos ou arquivo de submissão final entregues nesta adaptação.
