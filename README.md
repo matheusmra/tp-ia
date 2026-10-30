@@ -1,6 +1,6 @@
 # Detecção de intrusão em redes — roteiro da equipe
 
-Professora: Cristiane Neri Nobre. Este projeto organiza as tarefas dos cinco integrantes conforme os novos CSVs e o enunciado. **O notebook 01 reaproveita o código anterior dos membros 1–4, adaptado à nova base. Os notebooks 02–04 continuam como roteiros, sem implementação.** Cada membro deve revisar, completar e justificar sua seção; a análise de vazamento do Membro 5 permanece pendente no notebook 01.
+Professora: Cristiane Neri Nobre. Este projeto organiza as tarefas dos cinco integrantes conforme os novos CSVs e o enunciado. **O notebook 01 reaproveita o código anterior dos membros 1–4, adaptado à nova base. Os notebooks 02–04 continuam como roteiros, sem implementação.** Cada membro deve revisar, completar e justificar sua seção. A seção do Membro 5 do notebook 01 (associação de todos os atributos, investigação de vazamento, auditoria de conformidade e diagnóstico consolidado) está implementada; permanece pendente apenas a confirmação, com a professora, da origem dos três sinais operacionais.
 
 ## Base oficial
 
@@ -48,6 +48,6 @@ Todos participam da revisão e precisam compreender o fluxo completo. O respons�
 
 `src/` e `requirements.txt` foram devolvidos à versão anterior à implementação indevida. São estrutura **legada**, ainda com referências à base antiga e funções incompletas; a adaptação desses módulos faz parte das tarefas dos membros. O notebook 01 lê treino.csv diretamente, sem depender desses módulos; os demais roteiros não os executam.
 
-A versão antiga registrada no histórico Git foi a base do reaproveitamento no notebook 01. Suas conclusões numéricas e saídas foram retiradas para não confundi-las com a nova base. As células de código existentes foram verificadas com treino.csv; as sínteses e análises pendentes ainda precisam ser completadas pelos responsáveis.
+A versão antiga registrada no histórico Git foi a base do reaproveitamento no notebook 01. Suas conclusões numéricas e saídas foram retiradas para não confundi-las com a nova base. As células de código existentes foram verificadas com treino.csv e as cinco sínteses do notebook 01 estão preenchidas. O notebook 01 foi validado com Restart & Run All: 49 células de código executam em ordem, sem erros e sem dependência de estado oculto.
 
 `reports/estrutura_relatorio.md` contém o roteiro do relatório a ser escrito pela equipe. Não há resultados de modelos ou arquivo de submissão final entregues nesta adaptação.
