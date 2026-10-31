@@ -1,6 +1,25 @@
 # Detecção de intrusão em redes — roteiro da equipe
 
-Professora: Cristiane Neri Nobre. Este projeto organiza as tarefas dos cinco integrantes conforme os novos CSVs e o enunciado. **O notebook 01 reaproveita o código anterior dos membros 1–4, adaptado à nova base. Os notebooks 02–04 continuam como roteiros, sem implementação.** Cada membro deve revisar, completar e justificar sua seção. A seção do Membro 5 do notebook 01 (associação de todos os atributos, investigação de vazamento, auditoria de conformidade e diagnóstico consolidado) está implementada; permanece pendente apenas a confirmação, com a professora, da origem dos três sinais operacionais.
+**Professora:** Cristiane Neri Nobre. **Equipe:** Grupo 10.
+
+**Integrantes:**
+
+- Arthur Soares Rolla
+- Carlos Eduardo de Melo Sabino
+- Matheus de Almeida Moreira
+- Paulo Gabriel de Oliveira Leite
+- Samuel Lucas Rodrigues Vieira
+
+A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. Os notebooks 02–04 são roteiros das etapas futuras, sem implementação.
+
+A origem e a disponibilidade temporal dos três sinais operacionais ainda precisam ser confirmadas com a professora. O notebook documenta essa limitação e recomenda exclusão preventiva. Não apresenta a suspeita como vazamento comprovado.
+
+## Entrega 1 — 01/11/2026
+
+- Entregar o notebook `notebooks/01_analise_exploratoria.ipynb`, com as saídas salvas.
+- Para reproduzir, instalar as dependências de `requirements.txt`, manter `data/treino.csv` e executar **Restart & Run All** a partir da raiz ou de `notebooks/`.
+- O diagnóstico consolidado está no próprio notebook. Relatório final, modelos e CSV de previsões pertencem às etapas seguintes.
+- A identificação da equipe foi fornecida para esta entrega. As seções do notebook são temáticas e não atribuem contribuições individuais não confirmadas.
 
 ## Base oficial
 
@@ -12,7 +31,7 @@ Não usar os arquivos NSL-KDD antigos, não remapear para cinco famílias e não
 
 ## Uma tarefa para cada membro em cada notebook
 
-Substituir os identificadores pelos nomes do grupo do CANVAS. No notebook 01, cada seção preserva o código reaproveitável e indica a revisão ou complemento necessário. Nos notebooks 02–04, as seções descrevem tarefa, entregável, célula TODO e espaço para resultados e justificativa.
+A tabela abaixo preserva a distribuição de trabalho por posições de integrante, sem presumir o vínculo entre cada posição e os nomes. O notebook 01 apresenta as análises concluídas por seção temática. Nos notebooks 02–04, as seções descrevem tarefa, entregável, célula TODO e espaço para resultados e justificativa.
 
 | Integrante | 01 — Análise exploratória | 02 — Pré-processamento | 03 — Classificadores | 04 — Entrega final |
 |---|---|---|---|---|
@@ -22,7 +41,7 @@ Substituir os identificadores pelos nomes do grupo do CANVAS. No notebook 01, ca
 | Membro 4 | Redundâncias, inconsistências e outliers | Redução de dimensionalidade ou seleção de instâncias | Tabela comparativa estruturada | Previsões e CSV de submissão |
 | Membro 5 | Associação de todos os atributos, leakage e diagnóstico | Integração e comparação das estratégias | Seleção e auditoria metodológica | Relatório, apresentação e conferência da entrega |
 
-Todos participam da revisão e precisam compreender o fluxo completo. O responsável pela integração depende dos resultados dos demais; não deve executar sozinho as tarefas individuais.
+Todos participam da revisão e precisam compreender o fluxo completo. O responsável pela integração depende dos resultados dos demais. Não deve executar sozinho as tarefas individuais.
 
 ## Cronograma de 2026
 
@@ -37,6 +56,7 @@ Todos participam da revisão e precisam compreender o fluxo completo. O respons�
 
 - Investigar a associação de cada atributo com a classe antes do treinamento e justificar possíveis exclusões. Correlação não comprova vazamento por si só.
 - Investigar a origem e disponibilidade dos sinais adicionados, incluindo `score_ids_legado`, `tipo_alerta_soc` e `tempo_resposta_analista_min`.
+- Usar validação interna por grupos de registros equivalentes, buscando estratificação das classes. Manter cópias no mesmo grupo e usar as mesmas dobras nas comparações.
 - Ajustar imputação, codificação, normalização, balanceamento e redução apenas no treino de cada dobra.
 - Comparar explicitamente estratégias para dados redundantes/inconsistentes, pelo menos dois balanceamentos, codificação, transformação numérica e redução de dimensionalidade **ou seleção de instâncias**.
 - Comparar pelo menos três classificadores vistos em aula. Selecionar pelo F1-macro de validação interna e explicar o vencedor.
@@ -46,8 +66,8 @@ Todos participam da revisão e precisam compreender o fluxo completo. O respons�
 
 ## Arquivos de apoio
 
-`src/` e `requirements.txt` foram devolvidos à versão anterior à implementação indevida. São estrutura **legada**, ainda com referências à base antiga e funções incompletas; a adaptação desses módulos faz parte das tarefas dos membros. O notebook 01 lê treino.csv diretamente, sem depender desses módulos; os demais roteiros não os executam.
+`src/` contém estrutura legada, com referências à base antiga e funções incompletas. O notebook 01 lê `treino.csv` diretamente e não depende desses módulos. Sua adaptação pertence às próximas etapas.
 
-A versão antiga registrada no histórico Git foi a base do reaproveitamento no notebook 01. Suas conclusões numéricas e saídas foram retiradas para não confundi-las com a nova base. As células de código existentes foram verificadas com treino.csv e as cinco sínteses do notebook 01 estão preenchidas. O notebook 01 foi validado com Restart & Run All: 49 células de código executam em ordem, sem erros e sem dependência de estado oculto.
+As 49 células de código do notebook 01 foram executadas em ordem em uma sessão nova de kernel Python, sem erros, e as saídas foram atualizadas. O ambiente é registrado na célula de importação. As cinco sínteses foram revisadas para distinguir resultados descritivos, hipóteses de vazamento e propostas para a próxima etapa.
 
-`reports/estrutura_relatorio.md` contém o roteiro do relatório a ser escrito pela equipe. Não há resultados de modelos ou arquivo de submissão final entregues nesta adaptação.
+`reports/estrutura_relatorio.md` permanece como roteiro do relatório final. Não há modelos finais ou arquivo de submissão nesta entrega exploratória.
