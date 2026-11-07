@@ -10,9 +10,11 @@
 - Paulo Gabriel de Oliveira Leite
 - Samuel Lucas Rodrigues Vieira
 
-A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1, 2, 3 e 4 implementadas; suas partes 5 e os notebooks 03–04 continuam como roteiros.
+A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1–4 implementadas; sua parte 5 e os notebooks 03–04 continuam como roteiros.
 
 A parte 2 do notebook 02 compara ausência de balanceamento, RandomOverSampler, RandomUnderSampler e SMOTENC seguido de Tomek Links, com Árvore de Decisão e XGBoost nas mesmas cinco dobras por grupos. SMOTENC adapta a proposta SMOTETomek aos atributos categóricos da base. Instale `requirements.txt` e execute o notebook em ordem, a partir da raiz ou de `notebooks/`; a parte 2 reutiliza a carga, as dobras e a configuração da parte 1. XGBoost é um experimento adicional, sujeito à confirmação de que atende à exigência de algoritmo visto em aula para a etapa 3.
+
+As seções 2.4–2.6 ampliam a comparação para 27 configurações por modelo, incluindo cinco proporções de reamostragem, SMOTENC sem Tomek, Tomek isolado e pesos de classe. Foram executados 300 ajustes adicionais, com verificação dos finalistas em outra divisão por grupos. A proposta exploratória atual é XGBoost com `scale_pos_weight = sqrt(n_normal / n_anomaly)`, calculado apenas no treino filtrado de cada dobra: F1-macro médio 0,8744, contra 0,8702 sem balanceamento nas duas divisões. As duas divisões reutilizam os mesmos registros e não constituem um teste independente; a conclusão e as limitações estão na seção 2.6.
 
 A origem e a disponibilidade temporal dos três sinais operacionais ainda precisam ser confirmadas com a professora. O notebook documenta essa limitação e recomenda exclusão preventiva. Não apresenta a suspeita como vazamento comprovado.
 
