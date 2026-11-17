@@ -10,13 +10,15 @@
 - Paulo Gabriel de Oliveira Leite
 - Samuel Lucas Rodrigues Vieira
 
-A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1 e 2 implementadas; suas partes 3–5 e os notebooks 03–04 continuam como roteiros, exceto a seção do Membro 1 do notebook 03 (Árvore de Decisão e protocolo comum), já implementada.
-
-No notebook 03, a seção do Membro 1 define o protocolo comum da etapa 3: as mesmas cinco dobras por grupos da etapa 2 (com assinatura para conferência), as combinações P0–P4 recebidas da etapa 2, o avaliador `avaliar_modelo` e o resumo `resumir`. As seções dos Membros 2 e 3 devem executar depois dela e reutilizar esses itens.
+A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1–5 implementadas; os notebooks 03–04 continuam como roteiros.
 
 A parte 2 do notebook 02 compara ausência de balanceamento, RandomOverSampler, RandomUnderSampler e SMOTENC seguido de Tomek Links, com Árvore de Decisão e XGBoost nas mesmas cinco dobras por grupos. SMOTENC adapta a proposta SMOTETomek aos atributos categóricos da base. Instale `requirements.txt` e execute o notebook em ordem, a partir da raiz ou de `notebooks/`; a parte 2 reutiliza a carga, as dobras e a configuração da parte 1. XGBoost é um experimento adicional, sujeito à confirmação de que atende à exigência de algoritmo visto em aula para a etapa 3.
 
+As seções 2.4–2.6 ampliam a comparação para 27 configurações por modelo, incluindo cinco proporções de reamostragem, SMOTENC sem Tomek, Tomek isolado e pesos de classe. Foram executados 300 ajustes adicionais, com verificação dos finalistas em outra divisão por grupos. A proposta exploratória atual é XGBoost com `scale_pos_weight = sqrt(n_normal / n_anomaly)`, calculado apenas no treino filtrado de cada dobra: F1-macro médio 0,8744, contra 0,8702 sem balanceamento nas duas divisões. As duas divisões reutilizam os mesmos registros e não constituem um teste independente; a conclusão e as limitações estão na seção 2.6.
+
 A origem e a disponibilidade temporal dos três sinais operacionais ainda precisam ser confirmadas com a professora. O notebook documenta essa limitação e recomenda exclusão preventiva. Não apresenta a suspeita como vazamento comprovado.
+
+A parte 5 integra limpeza, codificação, balanceamento e PCA em dez estratégias, comparadas com Árvore de Decisão e XGBoost nas mesmas cinco dobras por grupos. Os dois melhores candidatos de cada modelo são reavaliados com a referência M1 na divisão de semente 137. As tabelas distinguem comparações controladas de combinações de fatores e registram métricas por classe, dimensões, tempos e contagens. `CONFIGS_ETAPA3_M5` contém as propostas exploratórias e `ajustar_configuracao_m5` reconstrói o pipeline, incluindo o filtro de conflitos restrito ao treino recebido. A integração mantém os sinais operacionais excluídos e não consulta o teste oficial. A etapa 3 ainda precisa comparar três classificadores vistos em aula.
 
 ## Entrega 1 — 01/11/2026
 
