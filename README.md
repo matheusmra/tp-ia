@@ -10,7 +10,9 @@
 - Paulo Gabriel de Oliveira Leite
 - Samuel Lucas Rodrigues Vieira
 
-A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1 e 2 implementadas; suas partes 3–5 e os notebooks 03–04 continuam como roteiros.
+A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook inclui a declaração de uso do OpenAI Codex como apoio à organização, revisão, correção e verificação da execução. O notebook 02 tem as partes 1 e 2 implementadas; suas partes 3–5 e os notebooks 03–04 continuam como roteiros, exceto a seção do Membro 1 do notebook 03 (Árvore de Decisão e protocolo comum), já implementada.
+
+No notebook 03, a seção do Membro 1 define o protocolo comum da etapa 3: as mesmas cinco dobras por grupos da etapa 2 (com assinatura para conferência), as combinações P0–P4 recebidas da etapa 2, o avaliador `avaliar_modelo` e o resumo `resumir`. As seções dos Membros 2 e 3 devem executar depois dela e reutilizar esses itens.
 
 A parte 2 do notebook 02 compara ausência de balanceamento, RandomOverSampler, RandomUnderSampler e SMOTENC seguido de Tomek Links, com Árvore de Decisão e XGBoost nas mesmas cinco dobras por grupos. SMOTENC adapta a proposta SMOTETomek aos atributos categóricos da base. Instale `requirements.txt` e execute o notebook em ordem, a partir da raiz ou de `notebooks/`; a parte 2 reutiliza a carga, as dobras e a configuração da parte 1. XGBoost é um experimento adicional, sujeito à confirmação de que atende à exigência de algoritmo visto em aula para a etapa 3.
 
