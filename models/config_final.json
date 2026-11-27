@@ -1,0 +1,70 @@
+{
+  "candidato": "RF aninhada + limiar · P2",
+  "classe_modelo": "RandomForestClassifier",
+  "parametros_modelo": {
+    "n_estimators": 300,
+    "criterion": "gini",
+    "max_depth": null,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "max_features": 0.3,
+    "bootstrap": true,
+    "class_weight": {
+      "0": 1.0,
+      "1": 4.0
+    },
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "limiar_decisao": 0.37,
+  "combinacao": "P2 P1 + raras agrupadas",
+  "pre_processamento": {
+    "normalizar_categorias": true,
+    "fora_dominio": "ausente",
+    "remover_redundantes": true,
+    "imputacao_num": "mediana",
+    "imputacao_cat": "constante",
+    "codificacao": "onehot_raras"
+  },
+  "escala": null,
+  "linhas_treino": "sem_conflitos",
+  "balanceamento": null,
+  "colunas_fora_dos_preditores": [
+    "id",
+    "class",
+    "score_ids_legado",
+    "tipo_alerta_soc",
+    "tempo_resposta_analista_min"
+  ],
+  "dados": {
+    "arquivo": "data/treino.csv",
+    "sha256_lf": "9713c75938ef1e9e513975f256d65a80c4b05df533d35336c67387020bf76b7f",
+    "linhas": 69833,
+    "atributos": 46
+  },
+  "sementes": {
+    "dobras": 42,
+    "selecao_interna": 42,
+    "modelo": 42
+  },
+  "validacao_etapa3": {
+    "assinatura_dobras": "8a814c72d149c698",
+    "f1_macro_media": 0.8818,
+    "f1_macro_dp": 0.0007,
+    "f1_macro_interno_limiar": 0.8806
+  },
+  "procedimento": "PipelineFinalIDS(CONFIG_FINAL).fit(*carregar_treino()) no notebook 04, seção do Membro 1",
+  "versoes_execucao": {
+    "Python": "3.14.7",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "imbalanced-learn": "0.14.2",
+    "joblib": "1.6.0"
+  },
+  "sha256_treino_lf": "9713c75938ef1e9e513975f256d65a80c4b05df533d35336c67387020bf76b7f",
+  "assinatura_dobras_conferida": "8a814c72d149c698",
+  "selecao_interna_conferida": true,
+  "linhas_ajuste": 66103,
+  "impressao_modelo": "af04051555f3d6a1"
+}
