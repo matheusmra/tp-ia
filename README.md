@@ -10,7 +10,7 @@
 - Paulo Gabriel de Oliveira Leite
 - Samuel Lucas Rodrigues Vieira
 
-A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook 02 (`notebooks/02_pre_processamento.ipynb`) implementa e compara as partes 1–5 de pré-processamento e balanceamento. O notebook 03 (`notebooks/03_classificadores.ipynb`) implementa e compara os três algoritmos obrigatórios da Etapa 3 (Árvore de Decisão, Random Forest e MLP) nas cinco dobras por grupos (`ASSINATURA_DOBRAS = 8a814c72d149c698`), com seleção aninhada de hiperparâmetros e auditoria metodológica; o notebook 04 continua como roteiro para a entrega final.
+A primeira entrega está em `notebooks/01_analise_exploratoria.ipynb`: análise exploratória do treino oficial, cinco sínteses e diagnóstico consolidado. O notebook 02 (`notebooks/02_pre_processamento.ipynb`) implementa e compara as partes 1–5 de pré-processamento e balanceamento. O notebook 03 (`notebooks/03_classificadores.ipynb`) implementa e compara os três algoritmos obrigatórios da Etapa 3 (Árvore de Decisão, Random Forest e MLP) nas cinco dobras por grupos (`ASSINATURA_DOBRAS = 8a814c72d149c698`), com seleção aninhada de hiperparâmetros e auditoria metodológica. O notebook 04 (`notebooks/04_avaliacao_final.ipynb`) consolida o pipeline final em todo `treino.csv`, o diagnóstico fora da dobra, a explicabilidade (SHAP e permutação OOF), a geração determinística de `submissao_10.csv` e a auditoria final da entrega, acompanhado por `reports/relatorio_final.md` e `reports/roteiro_apresentacao.md`.
 
 A parte 2 do notebook 02 compara ausência de balanceamento, RandomOverSampler, RandomUnderSampler e SMOTENC seguido de Tomek Links, com Árvore de Decisão e XGBoost nas mesmas cinco dobras por grupos. SMOTENC adapta a proposta SMOTETomek aos atributos categóricos da base. Instale `requirements.txt` e execute o notebook em ordem, a partir da raiz ou de `notebooks/`; a parte 2 reutiliza a carga, as dobras e a configuração da parte 1. XGBoost é um experimento adicional, sujeito à confirmação de que atende à exigência de algoritmo visto em aula para a etapa 3.
 
@@ -37,17 +37,17 @@ Na Etapa 3 (`notebooks/03_classificadores.ipynb`), Árvore de Decisão, Random F
 
 Não usar os arquivos NSL-KDD antigos, não remapear para cinco famílias e não criar outra separação oficial. A validação interna é permitida apenas dentro do treino. O teste não oferece gabarito: as métricas oficiais serão calculadas pela professora.
 
-## Uma tarefa para cada membro em cada notebook
+## Divisão de tarefas e contribuições nos notebooks
 
-A tabela abaixo preserva a distribuição de trabalho por posições de integrante, sem presumir o vínculo entre cada posição e os nomes. O notebook 01 apresenta as análises concluídas por seção temática. Nos notebooks 02–04, as seções descrevem tarefa, entregável, célula TODO e espaço para resultados e justificativa.
+Os notebooks 01 a 04 estão concluídos, executados e revisados pelo Grupo 10, com código, saídas e justificativas em cada seção:
 
 | Integrante | 01 — Análise exploratória | 02 — Pré-processamento | 03 — Classificadores | 04 — Entrega final |
 |---|---|---|---|---|
-| Membro 1 | Carga, estrutura, tipos e ausentes | Ausentes, redundâncias e inconsistências | Árvore de Decisão e protocolo comum | Reconstrução e treino final |
-| Membro 2 | Classes e desbalanceamento | Duas técnicas de balanceamento | Random Forest | Diagnóstico das métricas de validação |
-| Membro 3 | Categorias e cardinalidade | Codificação e transformação numérica | MLP ou terceiro algoritmo visto em aula | Explicabilidade do vencedor |
-| Membro 4 | Redundâncias, inconsistências e outliers | Redução de dimensionalidade ou seleção de instâncias | Tabela comparativa estruturada | Previsões e CSV de submissão |
-| Membro 5 | Associação de todos os atributos, leakage e diagnóstico | Integração e comparação das estratégias | Seleção e auditoria metodológica | Relatório, apresentação e conferência da entrega |
+| Samuel Lucas Rodrigues Vieira | Estrutura, tipos e ausentes | Ausentes, redundâncias e dobras por grupo | Árvore de Decisão e protocolo comum | Reconstrução e treino final |
+| Matheus de Almeida Moreira | Classes e desbalanceamento | Técnicas de balanceamento | Random Forest | Diagnóstico das métricas de validação |
+| Arthur Soares Rolla | Categorias e cardinalidade | Codificação e transformação numérica | MLP | Explicabilidade do vencedor |
+| Carlos Eduardo de Melo Sabino | Redundâncias, inconsistências e outliers | PCA | Tabela comparativa estruturada | Previsões e CSV de submissão |
+| Paulo Gabriel de Oliveira Leite | Associação, leakage e diagnóstico | Integração e comparação | Seleção e auditoria metodológica | Relatório, apresentação e conferência |
 
 Todos participam da revisão e precisam compreender o fluxo completo. O responsável pela integração depende dos resultados dos demais. Não deve executar sozinho as tarefas individuais.
 
@@ -72,10 +72,8 @@ Todos participam da revisão e precisam compreender o fluxo completo. O respons�
 - O notebook entregue deve reproduzir exatamente o CSV enviado. Informar o número real do grupo.
 - Declarar uso de IA e contribuições efetivas dos integrantes.
 
-## Arquivos de apoio
+## Entregáveis consolidados
 
-`src/` contém estrutura legada, com referências à base antiga e funções incompletas. O notebook 01 lê `treino.csv` diretamente e não depende desses módulos. Sua adaptação pertence às próximas etapas.
-
-As 49 células de código do notebook 01 foram executadas em ordem em uma sessão nova de kernel Python, sem erros, e as saídas foram atualizadas. O ambiente é registrado na célula de importação. As cinco sínteses foram revisadas para distinguir resultados descritivos, hipóteses de vazamento e propostas para a próxima etapa.
-
-`reports/estrutura_relatorio.md` permanece como roteiro do relatório final. Não há modelos finais ou arquivo de submissão nesta entrega exploratória.
+- **Notebooks autocontidos (Etapas 1 a 4):** `notebooks/01_analise_exploratoria.ipynb`, `notebooks/02_pre_processamento.ipynb`, `notebooks/03_classificadores.ipynb` e `notebooks/04_avaliacao_final.ipynb` (todos executados em ordem, sem erros e sem dependência de módulos externos).
+- **Artefatos do modelo e submissão:** `models/config_final.json` (impressão digital `676b7dadfe54344b`, limiar `0,37`) e `submissao_10.csv` (`24.333` previsões reproduzíveis byte a byte).
+- **Relatórios e apresentação:** `reports/relatorio_final.md`, `reports/relatorio_final_sbc/relatorio_final.pdf` (template SBC) e `reports/roteiro_apresentacao.md`.

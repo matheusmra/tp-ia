@@ -55,16 +55,16 @@
   },
   "procedimento": "PipelineFinalIDS(CONFIG_FINAL).fit(*carregar_treino()) no notebook 04, seção do Membro 1",
   "versoes_execucao": {
-    "Python": "3.14.7",
-    "numpy": "2.5.4",
-    "pandas": "3.0.6",
-    "scikit-learn": "1.9.1",
+    "Python": "3.13.14",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
     "imbalanced-learn": "0.14.2",
-    "joblib": "1.6.0"
+    "joblib": "1.5.3"
   },
   "sha256_treino_lf": "9713c75938ef1e9e513975f256d65a80c4b05df533d35336c67387020bf76b7f",
   "assinatura_dobras_conferida": "8a814c72d149c698",
   "selecao_interna_conferida": true,
   "linhas_ajuste": 66103,
-  "impressao_modelo": "af04051555f3d6a1"
+  "impressao_modelo": "676b7dadfe54344b"
 }

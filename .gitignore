@@ -51,9 +51,6 @@ venv.bak/
 # Large model artifacts and temporary data
 models/*.joblib
 models/*.pkl
-data/processed/*.csv
-data/processed/*.parquet
-data/processed/*.npy
 
 # Pytest / Coverage
 .pytest_cache/
